@@ -9,6 +9,7 @@ export default function Home() {
 
   const num = useRef();
   const range = useRef();
+  const password = useRef();
 
   const all = {
     letters: {
@@ -109,9 +110,35 @@ export default function Home() {
 
   return (
     <>
+      <div className="done">copied!</div>
       <div className="content">
         <div className="password">
-          <p>{res}</p>
+          <p
+            ref={password}
+            onClick={(e) => {
+              navigator.clipboard.writeText(e.target.textContent);
+              const done = document.querySelector(".done");
+              done.classList.add("ani");
+              setTimeout(() => {
+                done.classList.remove("ani");
+              }, 1500);
+            }}
+          >
+            {res}
+          </p>
+          <div
+            className="copyIcon"
+            onClick={() => {
+              navigator.clipboard.writeText(password.current.textContent);
+              const done = document.querySelector(".done");
+              done.classList.add("ani");
+              setTimeout(() => {
+                done.classList.remove("ani");
+              }, 1500);
+            }}
+          >
+            <i className="fi fi-rr-copy-alt"></i>
+          </div>
           <div
             className="line"
             style={{
@@ -151,31 +178,33 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="ranging">
-        <input
-          type="range"
-          min={6}
-          max={24}
-          defaultValue={6}
-          ref={range}
-          onChange={() => {
-            random();
-            num.current.value = range.current.value;
-            console.log(num.current.value, range.current.value);
-          }}
-        />
-        <input
-          type="number"
-          min={6}
-          max={24}
-          defaultValue={6}
-          ref={num}
-          onChange={() => {
-            random();
-            range.current.value = num.current.value;
-            console.log(num.current.value, range.current.value);
-          }}
-        />
+      <div className="content">
+        <div className="ranging">
+          <input
+            type="range"
+            min={1}
+            max={24}
+            defaultValue={6}
+            ref={range}
+            onChange={() => {
+              random();
+              num.current.value = range.current.value;
+              console.log(num.current.value, range.current.value);
+            }}
+          />
+          <input
+            type="number"
+            min={1}
+            max={24}
+            defaultValue={6}
+            ref={num}
+            onChange={() => {
+              random();
+              range.current.value = num.current.value;
+              console.log(num.current.value, range.current.value);
+            }}
+          />
+        </div>
       </div>
 
       <div style={{ textAlign: "center" }}>

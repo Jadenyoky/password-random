@@ -1,3 +1,5 @@
+@import "~@flaticon/flaticon-uicons/css/all/all";
+
 @font-face {
   font-family: neo-light;
   src: url(/fonts/light.otf);
@@ -27,6 +29,47 @@ body {
   font-family: neo-reg !important;
 }
 
+.done {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  height: 30px;
+  width: 100px;
+  background-color: green;
+  color: white;
+  border-radius: 24px;
+  font-size: 20px;
+}
+
+@keyframes aaa {
+
+  0%,
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1)
+  }
+
+  90% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1)
+  }
+
+}
+
+.ani {
+  animation: aaa 1.5s;
+}
+
 .content {
   display: flex;
   justify-content: center;
@@ -35,6 +78,8 @@ body {
 }
 
 .password {
+  display: flex;
+  align-items: center;
   gap: 20px;
   margin: 20px 25px;
   background-color: #fff;
@@ -46,9 +91,53 @@ body {
   position: relative;
 }
 
-.password p {
+.password::after {
+  content: '';
+  position: absolute;
+  top: 43%;
+  transform: translate(0, -50%);
+  right: 16.5%;
+  width: 20%;
+  height: 40px;
+  background: linear-gradient(90deg, hsla(0, 0%, 100%, 0) 0, #fff);
+}
+
+
+
+.password>p {
   text-align: center;
   font-size: 20px;
+  text-wrap: nowrap;
+  overflow: auto;
+  width: 85%;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.password>p:hover {
+  color: seagreen;
+}
+
+
+.password>p::-webkit-scrollbar {
+  display: none;
+}
+
+.copyIcon {
+  border: 1px solid transparent;
+  border-bottom: 1px solid grey;
+  color: grey;
+  font-size: 24px;
+  padding: 5px 10px;
+  z-index: 1;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.copyIcon:hover {
+  border-radius: 10px;
+  color: seagreen;
+  border: 1px solid seagreen;
 }
 
 .line {
@@ -62,11 +151,14 @@ body {
   transition: 0.5s ease;
 }
 
-.line p {
+.line>p {
   margin-top: 15px;
   padding: 10px;
   align-self: flex-start;
   border-radius: 24px;
+  width: 200px;
+  text-align: center;
+  font-size: 20px;
 }
 
 .ranging {
@@ -80,6 +172,8 @@ body {
   margin: 20px 35px;
   margin-top: 40px;
   border-radius: 10px;
+  width: 800px;
+  max-width: 90%;
 }
 
 .ranging input[type='number'] {
