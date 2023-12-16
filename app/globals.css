@@ -1,0 +1,117 @@
+@font-face {
+  font-family: neo-light;
+  src: url(/fonts/light.otf);
+}
+
+@font-face {
+  font-family: neo-reg;
+  src: url(/fonts/reg.otf);
+}
+
+@font-face {
+  font-family: neo-bold;
+  src: url(/fonts/bold.otf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #CAEDF7;
+  font-family: neo-reg !important;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.password {
+  gap: 20px;
+  margin: 20px 25px;
+  background-color: #fff;
+  padding: 20px;
+  min-height: 64px;
+  width: 800px;
+  max-width: 90%;
+  border-radius: 24px 24px 0 0;
+  position: relative;
+}
+
+.password p {
+  text-align: center;
+  font-size: 20px;
+}
+
+.line {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 8px;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: 0.5s ease;
+}
+
+.line p {
+  margin-top: 15px;
+  padding: 10px;
+  align-self: flex-start;
+  border-radius: 24px;
+}
+
+.ranging {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background-color: white;
+  padding: 20px;
+  margin: 20px 35px;
+  margin-top: 40px;
+  border-radius: 10px;
+}
+
+.ranging input[type='number'] {
+  background-color: gainsboro;
+  padding: 10px 0;
+  padding-left: 20px;
+  border: 0;
+  font-size: 20px;
+  outline: none;
+  border-radius: 10px;
+  color: blue;
+  font-family: neo-bold;
+}
+
+.ranging input[type='range'] {
+  -webkit-appearance: none;
+  background-color: gainsboro;
+  border-radius: 24px;
+  padding: 5px;
+}
+
+.btn {
+  background-color: #DD2222;
+  color: white;
+  border: 0;
+  padding: 6px 24px 8px;
+  border-radius: 24px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background-color: #aa1717;
+}
