@@ -112,12 +112,42 @@ body {
   width: 85%;
   cursor: pointer;
   transition: 0.3s ease;
+  position: relative;
 }
 
-.password>p:hover {
-  color: seagreen;
+.password>p::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 0%;
+  background-color: transparent;
+  border-radius: 24px;
+  transition: 0.3s;
 }
 
+.password>p:hover::before {
+  background-color: rgba(255, 0, 0, 0.055);
+  width: 30%;
+}
+
+.password>p::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 0%;
+  background-color: transparent;
+  border-radius: 24px;
+  transition: 0.3s;
+}
+
+.password>p:hover::after {
+  background-color: rgba(0, 255, 191, 0.055);
+  width: 30%;
+}
 
 .password>p::-webkit-scrollbar {
   display: none;
@@ -159,6 +189,20 @@ body {
   width: 200px;
   text-align: center;
   font-size: 20px;
+}
+
+
+.check {
+  position: relative;
+}
+
+.check::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 15px;
+  height: 15px;
+  background-color: red;
 }
 
 .ranging {

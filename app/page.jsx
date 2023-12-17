@@ -111,12 +111,13 @@ export default function Home() {
   return (
     <>
       <div className="done">copied!</div>
+
       <div className="content">
         <div className="password">
           <p
             ref={password}
             onClick={(e) => {
-              navigator.clipboard.writeText(e.target.textContent);
+              navigator.clipboard.writeText(password.current.textContent);
               const done = document.querySelector(".done");
               done.classList.add("ani");
               setTimeout(() => {
@@ -124,7 +125,25 @@ export default function Home() {
               }, 1500);
             }}
           >
-            {res}
+            {res.length > 0 &&
+              res.map((e) => (
+                <span
+                  style={{
+                    color:
+                      e ==
+                      all.letters.lowercase.filter((letter) => letter === e)
+                        ? "#087E8B"
+                        : e ==
+                          all.letters.uppercase.filter((letter) => letter === e)
+                        ? "#04A777"
+                        : e == all.numbers.filter((letter) => letter === e)
+                        ? "#FF9000"
+                        : "#777",
+                  }}
+                >
+                  {e}
+                </span>
+              ))}
           </p>
           <div
             className="copyIcon"
@@ -177,6 +196,8 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <div className="content"></div>
 
       <div className="content">
         <div className="ranging">
