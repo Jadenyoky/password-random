@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./page.module.css";
 import _ from "lodash";
+import { useAmp } from "next/amp";
 
 export default function Home() {
   const [loading, setloading] = useState(false);
@@ -10,6 +11,11 @@ export default function Home() {
   const num = useRef();
   const range = useRef();
   const password = useRef();
+
+  const [numUpper, setnumUpper] = useState(false);
+  const [numLower, setnumLower] = useState(false);
+  const [numNumbers, setnumNumbers] = useState(false);
+  const [numSymbols, setnumSymbols] = useState(false);
 
   const all = {
     letters: {
@@ -95,18 +101,50 @@ export default function Home() {
     numbers: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
   };
 
+  console.log(all.letters.uppercase.filter((e) => e === "Y"));
+
   const random = () => {
-    const capital = _.sampleSize(all.letters.uppercase, num.current.value);
-    const small = _.sampleSize(all.letters.lowercase, num.current.value);
-    const number = _.sampleSize(all.numbers, num.current.value);
-    const symbol = _.sampleSize(all.symbols, num.current.value);
-    const arr = _.flatMap([capital, small, number, symbol]);
+    const capital = _.sampleSize(
+      all.letters.uppercase,
+      numUpper ? 0 : all.letters.uppercase.length
+    );
+    const small = _.sampleSize(
+      all.letters.lowercase,
+      numLower ? 0 : all.letters.lowercase.length
+    );
+    const number = _.sampleSize(
+      all.numbers,
+      numNumbers ? 0 : all.numbers.length
+    );
+    const symbol = _.sampleSize(
+      all.symbols,
+      numSymbols ? 0 : all.symbols.length
+    );
+    const arr = _.flatMap([
+      number,
+      capital,
+      number,
+      small,
+      number,
+      symbol,
+      capital,
+      small,
+      number,
+      symbol,
+      number,
+      symbol,
+      number,
+      number,
+      capital,
+      small,
+    ]);
     setres(_.sampleSize(arr, num.current.value));
+    console.log(arr);
   };
 
   useEffect(() => {
     random();
-  }, []);
+  }, [numUpper, numLower, numNumbers, numSymbols]);
 
   return (
     <>
@@ -126,17 +164,17 @@ export default function Home() {
             }}
           >
             {res.length > 0 &&
-              res.map((e) => (
+              res.map((e, k) => (
                 <span
+                  key={k}
                   style={{
                     color:
-                      e ==
-                      all.letters.lowercase.filter((letter) => letter === e)
+                      e == all.letters.lowercase.filter((letter) => letter == e)
                         ? "#087E8B"
                         : e ==
-                          all.letters.uppercase.filter((letter) => letter === e)
+                          all.letters.uppercase.filter((letter) => letter == e)
                         ? "#04A777"
-                        : e == all.numbers.filter((letter) => letter === e)
+                        : e == all.numbers.filter((letter) => letter == e)
                         ? "#FF9000"
                         : "#777",
                   }}
@@ -162,69 +200,136 @@ export default function Home() {
             className="line"
             style={{
               width: num.current
-                ? num.current.value > 10
+                ? num.current.value >= 18
                   ? "100%"
-                  : "30%"
-                : "30%",
+                  : num.current.value >= 12
+                  ? "80%"
+                  : num.current.value >= 8
+                  ? "50%"
+                  : num.current.value >= 4
+                  ? "30%"
+                  : num.current.value >= 1
+                  ? "10%"
+                  : "10%"
+                : "10%",
               background: num.current
-                ? num.current.value > 10
-                  ? "green"
-                  : "red"
+                ? num.current.value >= 18
+                  ? "#04A777"
+                  : num.current.value >= 12
+                  ? "#FF9000"
+                  : num.current.value >= 8
+                  ? "#33AAF3"
+                  : num.current.value >= 4
+                  ? "red"
+                  : num.current.value >= 1
+                  ? "gainsboro"
+                  : "gainsboro"
                 : "gainsboro",
             }}
           >
             <p
               style={{
-                backgroundColor: num.current
-                  ? num.current.value > 10
-                    ? "green"
-                    : "red"
-                  : "grey",
-                color: num.current
-                  ? num.current.value > 10
-                    ? "white"
-                    : "white"
+                background: num.current
+                  ? num.current.value >= 18
+                    ? "#04A777"
+                    : num.current.value >= 12
+                    ? "#FF9000"
+                    : num.current.value >= 8
+                    ? "#33AAF3"
+                    : num.current.value >= 4
+                    ? "red"
+                    : num.current.value >= 1
+                    ? "gainsboro"
+                    : "gainsboro"
                   : "gainsboro",
+                color: num.current
+                  ? num.current.value <= 3
+                    ? "grey"
+                    : "white"
+                  : "grey",
               }}
             >
               {num.current
-                ? num.current.value > 10
+                ? num.current.value >= 18
                   ? "Very Strong"
-                  : "Not Save"
-                : "Not"}
+                  : num.current.value >= 12
+                  ? "Strong"
+                  : num.current.value >= 8
+                  ? "Secure"
+                  : num.current.value >= 4
+                  ? "Not Secure"
+                  : num.current.value >= 1
+                  ? "Low"
+                  : "Wait"
+                : "Wait"}
             </p>
           </div>
         </div>
       </div>
 
-      <div className="content"></div>
-
       <div className="content">
         <div className="ranging">
-          <input
-            type="range"
-            min={1}
-            max={24}
-            defaultValue={6}
-            ref={range}
-            onChange={() => {
-              random();
-              num.current.value = range.current.value;
-              console.log(num.current.value, range.current.value);
-            }}
-          />
-          <input
-            type="number"
-            min={1}
-            max={24}
-            defaultValue={6}
-            ref={num}
-            onChange={() => {
-              random();
-              range.current.value = num.current.value;
-              console.log(num.current.value, range.current.value);
-            }}
-          />
+          <div className="range">
+            <input
+              type="range"
+              min={1}
+              max={50}
+              defaultValue={8}
+              ref={range}
+              onChange={() => {
+                num.current.value = range.current.value;
+                random();
+                console.log(num.current.value, range.current.value);
+              }}
+            />
+            <input
+              type="number"
+              min={1}
+              max={50}
+              defaultValue={8}
+              ref={num}
+              onChange={() => {
+                range.current.value = num.current.value;
+                random();
+                console.log(num.current.value, range.current.value);
+              }}
+            />
+          </div>
+          <div className="choose">
+            <button
+              onClick={(e) => {
+                e.target.classList.toggle("cancel");
+                setnumUpper(!numUpper);
+              }}
+            >
+              UpperCase
+            </button>
+            <button
+              onClick={(e) => {
+                e.target.classList.toggle("cancel");
+                setnumLower(!numLower);
+              }}
+            >
+              LowerCase
+            </button>
+
+            <button
+              onClick={(e) => {
+                e.target.classList.toggle("cancel");
+                setnumNumbers(!numNumbers);
+              }}
+            >
+              Numbers
+            </button>
+            <button
+              onClick={(e) => {
+                e.target.classList.toggle("cancel");
+                setnumSymbols(!numSymbols);
+              }}
+            >
+              Symbols
+            </button>
+          </div>
         </div>
       </div>
 

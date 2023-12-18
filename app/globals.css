@@ -207,10 +207,11 @@ body {
 
 .ranging {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   justify-content: center;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 20px;
+  gap: 30px;
   background-color: white;
   padding: 20px;
   margin: 20px 35px;
@@ -220,23 +221,61 @@ body {
   max-width: 90%;
 }
 
+.range {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
 .ranging input[type='number'] {
-  background-color: gainsboro;
+  background-color: aliceblue;
   padding: 10px 0;
   padding-left: 20px;
-  border: 0;
+  border: 1px solid gainsboro;
   font-size: 20px;
   outline: none;
   border-radius: 10px;
-  color: blue;
+  color: #1CAA84;
   font-family: neo-bold;
 }
 
 .ranging input[type='range'] {
   -webkit-appearance: none;
-  background-color: gainsboro;
+  background-color: aliceblue;
   border-radius: 24px;
   padding: 5px;
+  border: 1px solid gainsboro;
+}
+
+.choose {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: 1px solid gainsboro;
+  padding: 15px;
+  border-radius: 24px;
+}
+
+.choose>button {
+  background-color: aliceblue;
+  color: seagreen;
+  border-radius: 16px;
+  display: flex;
+  gap: 10px;
+  padding: 7px 15px;
+  border: 0;
+  cursor: pointer;
+  font-size: 17px;
+  font-family: neo-bold;
+  transition: 0.3s ease;
+}
+
+.choose>button:hover,
+.cancel {
+  color: grey !important;
+  transform: scale(0.9);
 }
 
 .btn {
