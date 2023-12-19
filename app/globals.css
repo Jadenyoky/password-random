@@ -186,7 +186,7 @@ body {
   padding: 10px;
   align-self: flex-start;
   border-radius: 24px;
-  width: 200px;
+  /* width: 200px; */
   text-align: center;
   font-size: 20px;
 }
@@ -272,7 +272,6 @@ body {
   transition: 0.3s ease;
 }
 
-.choose>button:hover,
 .cancel {
   color: grey !important;
   transform: scale(0.9);

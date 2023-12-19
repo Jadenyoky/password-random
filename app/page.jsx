@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./page.module.css";
 import _ from "lodash";
-import { useAmp } from "next/amp";
 
 export default function Home() {
   const [loading, setloading] = useState(false);
@@ -247,6 +246,19 @@ export default function Home() {
                     ? "grey"
                     : "white"
                   : "grey",
+                width: num.current
+                  ? num.current.value >= 18
+                    ? "100%"
+                    : num.current.value >= 12
+                    ? "100%"
+                    : num.current.value >= 8
+                    ? "100%"
+                    : num.current.value >= 4
+                    ? "200px"
+                    : num.current.value >= 1
+                    ? "200px"
+                    : "200px"
+                  : "200px",
               }}
             >
               {num.current
@@ -298,16 +310,35 @@ export default function Home() {
           <div className="choose">
             <button
               onClick={(e) => {
-                e.target.classList.toggle("cancel");
-                setnumUpper(!numUpper);
+                if (
+                  // numUpper === true &&
+                  numLower === true &&
+                  numNumbers === true &&
+                  numSymbols === true
+                ) {
+                  setnumUpper(false);
+                } else {
+                  e.target.classList.toggle("cancel");
+                  setnumUpper(!numUpper);
+                }
               }}
             >
               UpperCase
             </button>
+
             <button
               onClick={(e) => {
-                e.target.classList.toggle("cancel");
-                setnumLower(!numLower);
+                if (
+                  numUpper === true &&
+                  // numLower === true &&
+                  numNumbers === true &&
+                  numSymbols === true
+                ) {
+                  setnumLower(false);
+                } else {
+                  e.target.classList.toggle("cancel");
+                  setnumLower(!numLower);
+                }
               }}
             >
               LowerCase
@@ -315,16 +346,35 @@ export default function Home() {
 
             <button
               onClick={(e) => {
-                e.target.classList.toggle("cancel");
-                setnumNumbers(!numNumbers);
+                if (
+                  numUpper === true &&
+                  numLower === true &&
+                  // numNumbers === true &&
+                  numSymbols === true
+                ) {
+                  setnumNumbers(false);
+                } else {
+                  e.target.classList.toggle("cancel");
+                  setnumNumbers(!numNumbers);
+                }
               }}
             >
               Numbers
             </button>
+
             <button
               onClick={(e) => {
-                e.target.classList.toggle("cancel");
-                setnumSymbols(!numSymbols);
+                if (
+                  numUpper === true &&
+                  numLower === true &&
+                  numNumbers === true
+                  // numSymbols === true
+                ) {
+                  setnumSymbols(false);
+                } else {
+                  e.target.classList.toggle("cancel");
+                  setnumSymbols(!numSymbols);
+                }
               }}
             >
               Symbols
