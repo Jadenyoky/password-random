@@ -29,6 +29,10 @@ body {
   font-family: neo-reg !important;
 }
 
+a {
+  text-decoration: none;
+}
+
 .done {
   position: absolute;
   bottom: 40px;
@@ -39,7 +43,6 @@ body {
   align-items: center;
   padding: 20px;
   height: 30px;
-  width: 100px;
   background-color: green;
   color: white;
   border-radius: 24px;
@@ -170,6 +173,27 @@ body {
   border: 1px solid seagreen;
 }
 
+.saveIcon {
+  border: 1px solid transparent;
+  border-bottom: 1px solid grey;
+  color: grey;
+  font-size: 24px;
+  padding: 5px 10px;
+  z-index: 1;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.saveIcon:hover {
+  border-radius: 10px;
+  color: seagreen;
+  border: 1px solid seagreen;
+}
+
+.active {
+  color: seagreen;
+}
+
 .line {
   position: absolute;
   left: 0;
@@ -277,6 +301,16 @@ body {
   transform: scale(0.9);
 }
 
+.gen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 800px;
+  max-width: 90%;
+  margin: 0 25px;
+
+}
+
 .btn {
   background-color: #DD2222;
   color: white;
@@ -290,4 +324,18 @@ body {
 
 .btn:hover {
   background-color: #aa1717;
+}
+
+.draftIcon {
+  border-radius: 20px;
+  margin: 20px;
+  padding: 10px 20px;
+  font-size: 40px;
+  color: grey;
+  transition: 0.3s ease;
+  background-color: white;
+}
+
+.draftIcon:hover {
+  color: green;
 }

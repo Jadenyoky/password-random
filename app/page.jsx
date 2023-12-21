@@ -2,10 +2,15 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./page.module.css";
 import _ from "lodash";
+import Link from "next/link";
 
 export default function Home() {
+  const store = JSON.parse(localStorage.getItem("saved"));
+  const [saved, setsaved] = useState(store ? store : []);
+
   const [loading, setloading] = useState(false);
   const [res, setres] = useState("");
+  const [keep, setkeep] = useState(false);
 
   const num = useRef();
   const range = useRef();
@@ -100,9 +105,8 @@ export default function Home() {
     numbers: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
   };
 
-  console.log(all.letters.uppercase.filter((e) => e === "Y"));
-
   const random = () => {
+    setkeep(false);
     const capital = _.sampleSize(
       all.letters.uppercase,
       numUpper ? 0 : all.letters.uppercase.length
@@ -138,28 +142,33 @@ export default function Home() {
       small,
     ]);
     setres(_.sampleSize(arr, num.current.value));
-    console.log(arr);
   };
 
   useEffect(() => {
     random();
   }, [numUpper, numLower, numNumbers, numSymbols]);
 
+  useEffect(() => {
+    localStorage.setItem("saved", JSON.stringify(saved));
+    console.log("effect", saved);
+  }, [saved]);
+
   return (
     <>
-      <div className="done">copied!</div>
-
       <div className="content">
         <div className="password">
           <p
             ref={password}
             onClick={(e) => {
               navigator.clipboard.writeText(password.current.textContent);
-              const done = document.querySelector(".done");
-              done.classList.add("ani");
+              const elem = document.createElement("div");
+              elem.textContent = "Copied!";
+              elem.classList.add("done");
+              elem.classList.add("ani");
               setTimeout(() => {
-                done.classList.remove("ani");
+                elem.classList.remove("ani");
               }, 1500);
+              document.body.append(elem);
             }}
           >
             {res.length > 0 &&
@@ -182,19 +191,83 @@ export default function Home() {
                 </span>
               ))}
           </p>
+
           <div
             className="copyIcon"
             onClick={() => {
               navigator.clipboard.writeText(password.current.textContent);
-              const done = document.querySelector(".done");
-              done.classList.add("ani");
+              const elem = document.createElement("div");
+              elem.textContent = "Copied!";
+              elem.classList.add("done");
+              elem.classList.add("ani");
               setTimeout(() => {
-                done.classList.remove("ani");
+                elem.classList.remove("ani");
               }, 1500);
+              document.body.append(elem);
             }}
           >
             <i className="fi fi-rr-copy-alt"></i>
           </div>
+
+          {keep ? (
+            <div
+              className="saveIcon active"
+              onClick={() => {
+                const elem = document.createElement("div");
+                elem.textContent = "Removed!";
+                elem.classList.add("done");
+                elem.classList.add("ani");
+                setTimeout(() => {
+                  elem.classList.remove("ani");
+                }, 1500);
+                document.body.append(elem);
+
+                setsaved(
+                  saved.filter(
+                    (item) => item.word !== password.current.textContent
+                  )
+                );
+
+                setkeep(false);
+              }}
+            >
+              <i className="fi fi-sr-star"></i>
+            </div>
+          ) : (
+            <div
+              className="saveIcon"
+              onClick={() => {
+                const elem = document.createElement("div");
+                elem.textContent = "Saved!";
+                elem.classList.add("done");
+                elem.classList.add("ani");
+                setTimeout(() => {
+                  elem.classList.remove("ani");
+                }, 1500);
+                document.body.append(elem);
+
+                // tip.current.textContent = "Saved!";
+                // tip.current.classList.add("ani");
+                // setTimeout(() => {
+                //   tip.current.classList.remove("ani");
+                // }, 1500);
+                const add = [
+                  ...saved,
+                  {
+                    id: Date.now(),
+                    date: new Date().toString(),
+                    word: password.current.textContent,
+                  },
+                ];
+                setsaved(_.uniqBy(add, "word"));
+                setkeep(true);
+                console.log("false keep");
+              }}
+            >
+              <i className="fi fi-rr-star"></i>
+            </div>
+          )}
+
           <div
             className="line"
             style={{
@@ -383,15 +456,20 @@ export default function Home() {
         </div>
       </div>
 
-      <div style={{ textAlign: "center" }}>
-        <button
-          onClick={() => {
-            random();
-          }}
-          className="btn"
-        >
-          Random
-        </button>
+      <div className="content">
+        <div className="gen">
+          <button
+            onClick={() => {
+              random();
+            }}
+            className="btn"
+          >
+            Generate
+          </button>
+          <Link href={"/test"} className="draftIcon">
+            <i class="fi fi-rr-memo-circle-check"></i>
+          </Link>
+        </div>
       </div>
     </>
   );
