@@ -3,11 +3,14 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./page.module.css";
 import _ from "lodash";
 import Link from "next/link";
+import store from "store2";
 
 export default function Home() {
-  const store = JSON.parse(localStorage.getItem("saved"));
-  const [saved, setsaved] = useState(store ? store : []);
-
+  const sr = store("ssd");
+  console.log(sr);
+  const [saved, setsaved] = useState(sr ? sr : []);
+  // const store = JSON.parse(localStorage.getItem("saved"));
+  // const [saved, setsaved] = useState(store ? store : []);
   const [loading, setloading] = useState(false);
   const [res, setres] = useState("");
   const [keep, setkeep] = useState(false);
@@ -149,7 +152,10 @@ export default function Home() {
   }, [numUpper, numLower, numNumbers, numSymbols]);
 
   useEffect(() => {
-    localStorage.setItem("saved", JSON.stringify(saved));
+    // localStorage.setItem("saved", JSON.stringify(saved));
+
+    store("ssd", saved);
+
     console.log("effect", saved);
   }, [saved]);
 
@@ -467,7 +473,7 @@ export default function Home() {
             Generate
           </button>
           <Link href={"/test"} className="draftIcon">
-            <i class="fi fi-rr-memo-circle-check"></i>
+            <i className="fi fi-rr-memo-circle-check"></i>
           </Link>
         </div>
       </div>
