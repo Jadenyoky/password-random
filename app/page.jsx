@@ -7,22 +7,24 @@ import store from "store2";
 ("store2");
 
 export default function Home() {
+  const [loading, setloading] = useState(false);
+  // Array in localstorage
   const inStore = store("saved");
   const [saved, setsaved] = useState(inStore ? inStore : []);
-
-  const [loading, setloading] = useState(false);
-  const [res, setres] = useState("");
+  // The password array
+  const [res, setres] = useState([]);
+  // To switch save and remove icon
   const [keep, setkeep] = useState(false);
-
+  // To control in range and number letters in password
   const num = useRef();
   const range = useRef();
   const password = useRef();
-
+  // To switch number letters or zero letters
   const [numUpper, setnumUpper] = useState(false);
   const [numLower, setnumLower] = useState(false);
   const [numNumbers, setnumNumbers] = useState(false);
   const [numSymbols, setnumSymbols] = useState(false);
-
+  // Array all string and numbers available
   const all = {
     letters: {
       uppercase: [
@@ -106,7 +108,7 @@ export default function Home() {
     ],
     numbers: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
   };
-
+  // Function to generate password with limit number of letters
   const random = () => {
     setkeep(false);
     const capital = _.sampleSize(
@@ -145,34 +147,72 @@ export default function Home() {
     ]);
     setres(_.sampleSize(arr, num.current.value));
   };
+  // Function to copy current password
+  function copy() {
+    navigator.clipboard.writeText(password.current.textContent);
+    const elem = document.createElement("div");
+    elem.textContent = "Copied!";
+    elem.classList.add("done");
+    elem.classList.add("ani");
+    setTimeout(() => {
+      elem.classList.remove("ani");
+    }, 1500);
+    document.body.append(elem);
+  }
+  // Function to save current password
+  function save() {
+    const elem = document.createElement("div");
+    elem.textContent = "Saved!";
+    elem.classList.add("done");
+    elem.classList.add("ani");
+    setTimeout(() => {
+      elem.classList.remove("ani");
+    }, 1500);
+    document.body.append(elem);
 
+    const add = [
+      ...saved,
+      {
+        id: Date.now(),
+        date: new Date().toString(),
+        word: password.current.textContent,
+        save: true,
+      },
+    ];
+    setsaved(_.uniqBy(add, "word"));
+    setkeep(true);
+  }
+  // Function to remove current password
+  function remove() {
+    const elem = document.createElement("div");
+    elem.textContent = "Removed!";
+    elem.classList.add("done");
+    elem.classList.add("ani");
+    setTimeout(() => {
+      elem.classList.remove("ani");
+    }, 1500);
+    document.body.append(elem);
+
+    setsaved(
+      saved.filter((item) => item.word !== password.current.textContent)
+    );
+
+    setkeep(false);
+  }
+  // Active each time change any state of that
   useEffect(() => {
     random();
   }, [numUpper, numLower, numNumbers, numSymbols]);
-
+  // Active each time change saved state
   useEffect(() => {
     store("saved", saved);
-    console.log("effect", saved);
   }, [saved]);
 
   return (
     <>
       <div className="content">
         <div className="password">
-          <p
-            ref={password}
-            onClick={(e) => {
-              navigator.clipboard.writeText(password.current.textContent);
-              const elem = document.createElement("div");
-              elem.textContent = "Copied!";
-              elem.classList.add("done");
-              elem.classList.add("ani");
-              setTimeout(() => {
-                elem.classList.remove("ani");
-              }, 1500);
-              document.body.append(elem);
-            }}
-          >
+          <p ref={password} onClick={copy}>
             {res.length > 0 &&
               res.map((e, k) => (
                 <span
@@ -194,79 +234,17 @@ export default function Home() {
               ))}
           </p>
 
-          <div
-            className="copyIcon"
-            onClick={() => {
-              navigator.clipboard.writeText(password.current.textContent);
-              const elem = document.createElement("div");
-              elem.textContent = "Copied!";
-              elem.classList.add("done");
-              elem.classList.add("ani");
-              setTimeout(() => {
-                elem.classList.remove("ani");
-              }, 1500);
-              document.body.append(elem);
-            }}
-          >
+          <div className="copyIcon" onClick={copy}>
             <i className="fi fi-rr-copy-alt"></i>
           </div>
 
           {keep ? (
-            <div
-              className="saveIcon active"
-              onClick={() => {
-                const elem = document.createElement("div");
-                elem.textContent = "Removed!";
-                elem.classList.add("done");
-                elem.classList.add("ani");
-                setTimeout(() => {
-                  elem.classList.remove("ani");
-                }, 1500);
-                document.body.append(elem);
-
-                setsaved(
-                  saved.filter(
-                    (item) => item.word !== password.current.textContent
-                  )
-                );
-
-                setkeep(false);
-              }}
-            >
-              <i className="fi fi-sr-star"></i>
+            <div className="saveIcon active" onClick={remove}>
+              <img width={`24px`} src="/pics/star-solid.png" />
             </div>
           ) : (
-            <div
-              className="saveIcon"
-              onClick={() => {
-                const elem = document.createElement("div");
-                elem.textContent = "Saved!";
-                elem.classList.add("done");
-                elem.classList.add("ani");
-                setTimeout(() => {
-                  elem.classList.remove("ani");
-                }, 1500);
-                document.body.append(elem);
-
-                // tip.current.textContent = "Saved!";
-                // tip.current.classList.add("ani");
-                // setTimeout(() => {
-                //   tip.current.classList.remove("ani");
-                // }, 1500);
-                const add = [
-                  ...saved,
-                  {
-                    id: Date.now(),
-                    date: new Date().toString(),
-                    word: password.current.textContent,
-                  },
-                ];
-                setsaved(_.uniqBy(add, "word"));
-                setkeep(true);
-                console.log("false keep");
-              }}
-            >
-              <i className="fi fi-rr-star"></i>
+            <div className="saveIcon" onClick={save}>
+              <img width={`24px`} src="/pics/star-light.png" />
             </div>
           )}
 
@@ -468,7 +446,7 @@ export default function Home() {
           >
             Generate
           </button>
-          <Link href={"/test"} className="draftIcon">
+          <Link href={"/password"} className="draftIcon">
             <i className="fi fi-rr-memo-circle-check"></i>
           </Link>
         </div>
