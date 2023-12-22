@@ -4,13 +4,12 @@ import styles from "./page.module.css";
 import _ from "lodash";
 import Link from "next/link";
 import store from "store2";
+("store2");
 
 export default function Home() {
-  const sr = store("ssd");
-  console.log(sr);
-  const [saved, setsaved] = useState(sr ? sr : []);
-  // const store = JSON.parse(localStorage.getItem("saved"));
-  // const [saved, setsaved] = useState(store ? store : []);
+  const inStore = store("saved");
+  const [saved, setsaved] = useState(inStore ? inStore : []);
+
   const [loading, setloading] = useState(false);
   const [res, setres] = useState("");
   const [keep, setkeep] = useState(false);
@@ -152,10 +151,7 @@ export default function Home() {
   }, [numUpper, numLower, numNumbers, numSymbols]);
 
   useEffect(() => {
-    // localStorage.setItem("saved", JSON.stringify(saved));
-
-    store("ssd", saved);
-
+    store("saved", saved);
     console.log("effect", saved);
   }, [saved]);
 
