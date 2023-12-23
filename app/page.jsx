@@ -317,11 +317,11 @@ export default function Password() {
                     : num.current.value >= 8
                     ? "100%"
                     : num.current.value >= 4
-                    ? "200px"
+                    ? "200px !important"
                     : num.current.value >= 1
-                    ? "200px"
-                    : "200px"
-                  : "200px",
+                    ? "200px !important"
+                    : "200px !important"
+                  : "200px !important",
               }}
             >
               {num.current
