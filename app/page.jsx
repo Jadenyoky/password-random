@@ -211,6 +211,15 @@ export default function Home() {
   return (
     <>
       <div className="content">
+        <div className="navigate">
+          <Link className="linking" href={`/`}>
+            Generate
+          </Link>
+          <Link href={`/password`}>List</Link>
+        </div>
+      </div>
+
+      <div className="content">
         <div className="password">
           <p ref={password} onClick={copy}>
             {res.length > 0 &&

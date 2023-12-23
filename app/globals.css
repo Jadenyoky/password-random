@@ -80,6 +80,36 @@ a {
   flex-direction: column;
 }
 
+.navigate {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  padding: 10px 20px;
+  align-items: center;
+  margin: 20px 25px;
+  width: 800px;
+  max-width: 90%;
+  border-radius: 24px;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.329);
+  text-align: center;
+}
+
+.navigate>a {
+  padding: 10px 20px;
+  color: seagreen;
+  border-radius: 24px;
+  transition: 0.3s ease;
+  font-size: 20px;
+  min-width: 30%;
+}
+
+.linking,
+.navigate>a:hover {
+  background-color: aliceblue;
+  color: seagreen;
+}
+
 .password {
   display: flex;
   align-items: center;
@@ -338,4 +368,15 @@ a {
 
 .draftIcon:hover {
   color: green;
+}
+
+.noPassword {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 16px;
+  color: dimgray
 }
