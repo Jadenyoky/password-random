@@ -5,8 +5,10 @@ import _ from "lodash";
 import Link from "next/link";
 import store from "store2";
 ("store2");
+import "animate.css";
+import PasswordSaving from "./password/page";
 
-export default function Home() {
+export default function Password() {
   const [loading, setloading] = useState(false);
   // Array in localstorage
   const inStore = store("saved");
@@ -218,9 +220,8 @@ export default function Home() {
           <Link href={`/password`}>List</Link>
         </div>
       </div>
-
       <div className="content">
-        <div className="password">
+        <div className="password animate__animated animate__fadeIn">
           <p ref={password} onClick={copy}>
             {res.length > 0 &&
               res.map((e, k) => (
@@ -340,9 +341,8 @@ export default function Home() {
           </div>
         </div>
       </div>
-
       <div className="content">
-        <div className="ranging">
+        <div className="ranging animate__animated animate__zoomIn">
           <div className="range">
             <input
               type="range"
@@ -442,11 +442,7 @@ export default function Home() {
               Symbols
             </button>
           </div>
-        </div>
-      </div>
 
-      <div className="content">
-        <div className="gen">
           <button
             onClick={() => {
               random();
@@ -455,11 +451,15 @@ export default function Home() {
           >
             Generate
           </button>
+        </div>
+      </div>
+      {/* <div className="content">
+        <div className="gen">
           <Link href={"/password"} className="draftIcon">
             <i className="fi fi-rr-memo-circle-check"></i>
           </Link>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
