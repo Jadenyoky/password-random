@@ -398,7 +398,8 @@ a {
   background-color: white;
   padding: 10px 20px;
   border-radius: 16px;
-  color: dimgray
+  color: dimgray;
+  text-wrap: nowrap;
 }
 
 .list {
@@ -406,11 +407,12 @@ a {
   flex-direction: column;
   gap: 25px;
   /* margin-bottom: 50px; */
-  position: relative;
-  height: calc(100vh - 104px);
+  /* position: relative; */
+  max-height: calc(100vh - 104px);
   /* min-height: 80vh; */
   overflow: auto;
   padding-bottom: 50px;
+  /* border: 2px solid; */
 }
 
 ::-webkit-scrollbar {
