@@ -409,9 +409,9 @@ a {
   /* position: relative; */
   /* max-height: calc(100vh - 104px); */
   /* min-height: 70vh; */
-  height: calc(100vh - 160px);
+  height: calc(100vh - 180px);
   overflow: auto;
-  padding-bottom: 50px;
+  padding-bottom: 100px;
   /* border: 2px solid; */
   border-top: 1px solid white;
 
@@ -460,11 +460,15 @@ a {
 }
 
 .removeAll {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 55px;
-  border-top: 1px solid white;
+  /* height: 55px; */
+  /* border-top: 1px solid white; */
 }
 
 .removeAll>span {
