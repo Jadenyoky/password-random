@@ -409,7 +409,7 @@ a {
   /* position: relative; */
   /* max-height: calc(100vh - 104px); */
   /* min-height: 70vh; */
-  height: calc(100vh - 160px);
+  height: calc(100vh - 210px);
   overflow: auto;
   padding-bottom: 50px;
   /* border: 2px solid; */
