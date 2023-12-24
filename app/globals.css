@@ -106,7 +106,7 @@ a {
 
 .linking,
 .navigate>a:hover {
-  background-color: aliceblue;
+  background-color: white;
   color: seagreen;
 }
 
@@ -407,11 +407,14 @@ a {
   gap: 25px;
   /* margin-bottom: 50px; */
   /* position: relative; */
-  max-height: calc(100vh - 104px);
-  /* min-height: 80vh; */
+  /* max-height: calc(100vh - 104px); */
+  /* min-height: 70vh; */
+  height: calc(100vh - 160px);
   overflow: auto;
   padding-bottom: 50px;
   /* border: 2px solid; */
+  border-top: 1px solid white;
+
 }
 
 ::-webkit-scrollbar {
@@ -423,7 +426,7 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: teal;
+  background-color: transparent;
   border-radius: 25px;
   border: 3px solid white;
 }
@@ -454,4 +457,25 @@ a {
   min-width: 40px;
   text-align: center;
   border: 1px solid gainsboro;
+}
+
+.removeAll {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 55px;
+  border-top: 1px solid white;
+}
+
+.removeAll>span {
+  background-color: crimson;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.removeAll>span:hover {
+  background-color: rgb(168, 6, 39);
 }

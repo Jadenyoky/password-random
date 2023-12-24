@@ -47,6 +47,7 @@ export default function PasswordSaving() {
         date: new Date().toString(),
         word: password,
         save: true,
+        length: password.length,
       },
     ];
     setsaved(_.uniqBy(add, "word"));
@@ -171,7 +172,7 @@ export default function PasswordSaving() {
                         </div>
                       )}
 
-                      <div className="length">{e.word.length}</div>
+                      <div className="length">{e.length}</div>
                       <div className="numList">{k + 1}</div>
 
                       <div
@@ -265,7 +266,9 @@ export default function PasswordSaving() {
               );
             })
           ) : (
-            <div className="noPassword">NO PASSWORD SAVED YET ...</div>
+            <div className="noPassword animate__animated animate__fadeIn">
+              NO PASSWORD SAVED YET ...
+            </div>
           )}
         </div>
       ) : (
@@ -313,8 +316,8 @@ export default function PasswordSaving() {
                         <div
                           className="saveIcon active"
                           onClick={() => {
-                            remove(e.word);
                             e.save = false;
+                            remove(e.word);
                           }}
                         >
                           <img width={`24px`} src="/pics/star-solid.png" />
@@ -323,14 +326,14 @@ export default function PasswordSaving() {
                         <div
                           className="saveIcon"
                           onClick={() => {
-                            save(e.word);
                             e.save = true;
+                            save(e.word);
                           }}
                         >
                           <img width={`24px`} src="/pics/star-light.png" />
                         </div>
                       )}
-                      <div className="length">{e.word.length}</div>
+                      <div className="length">{e.length}</div>
                       <div className="numList">{k + 1}</div>
                       <div
                         className="line"
@@ -423,10 +426,27 @@ export default function PasswordSaving() {
               );
             })
           ) : (
-            <div className="noPassword">NO PASSWORD SAVED YET ...</div>
+            <div className="noPassword animate__animated animate__fadeIn">
+              NO PASSWORD SAVED YET ...
+            </div>
           )}
         </div>
       )}
+
+      {loading && saved.length > 2 ? (
+        <div className="removeAll">
+          <span
+            className="animate__animated animate__fadeInDown"
+            onClick={() => {
+              store.remove("saved");
+              setres([]);
+              setsaved([]);
+            }}
+          >
+            Remove All
+          </span>
+        </div>
+      ) : null}
     </>
   );
 }
