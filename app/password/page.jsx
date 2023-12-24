@@ -115,7 +115,7 @@ export default function PasswordSaving() {
               return (
                 <div key={k}>
                   <div className="content">
-                    <div className="password animate__animated animate__bounceInUp">
+                    <div className="password animate__animated animate__fadeIn">
                       <p
                         onClick={() => {
                           copy(e.word);
