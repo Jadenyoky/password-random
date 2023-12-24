@@ -47,6 +47,7 @@ a {
   color: white;
   border-radius: 24px;
   font-size: 20px;
+  z-index: 10;
 }
 
 @keyframes aaa {
@@ -409,13 +410,12 @@ a {
   /* position: relative; */
   /* max-height: calc(100vh - 104px); */
   /* min-height: 70vh; */
-  height: 72vh;
+  height: calc(100vh - 180px);
   overflow: auto;
-  padding-bottom: 50px;
+  padding-bottom: 100px;
   /* border: 2px solid; */
   border-top: 1px solid white;
   border-bottom: 1px solid white;
-
 }
 
 ::-webkit-scrollbar {
