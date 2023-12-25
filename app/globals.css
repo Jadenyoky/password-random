@@ -405,7 +405,7 @@ a {
 .list {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 30px;
   /* margin-bottom: 50px; */
   /* position: relative; */
   /* max-height: calc(100vh - 104px); */
@@ -470,6 +470,22 @@ a {
   text-align: center;
   border: 1px solid gainsboro;
 }
+
+.date {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 1;
+  background-color: white;
+  color: grey;
+  border: 1px solid gainsboro;
+  padding: 5px 10px;
+  border-radius: 10px;
+  text-align: center;
+  text-wrap: nowrap;
+}
+
 
 .removeAll {
   position: absolute;

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import store from "store2";
 import "animate.css";
+import moment from "moment";
 
 export default function PasswordSaving() {
   const [loading, setloading] = useState(false);
@@ -177,6 +178,7 @@ export default function PasswordSaving() {
 
                       <div className="length">{e.length}</div>
                       <div className="numList">{k + 1}</div>
+                      <div className="date">{moment(e.date).fromNow()}</div>
 
                       <div
                         className="line"
