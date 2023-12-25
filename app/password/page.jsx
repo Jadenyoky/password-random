@@ -111,9 +111,9 @@ export default function PasswordSaving() {
 
       {mode ? (
         <div className="list">
-          {loading && res.length > 2 ? (
+          {/* {loading && res.length > 2 ? (
             <div className="shadow animate__animated animate__fadeIn"></div>
-          ) : null}
+          ) : null} */}
           {loading && res.length > 0 ? (
             res.map((e, k) => {
               return (
@@ -276,9 +276,9 @@ export default function PasswordSaving() {
         </div>
       ) : (
         <div className="list">
-          {loading && saved.length > 2 ? (
+          {/* {loading && saved.length > 2 ? (
             <div className="shadow animate__animated animate__fadeIn"></div>
-          ) : null}
+          ) : null} */}
           {loading && saved.length > 0 ? (
             saved.map((e, k) => {
               return (

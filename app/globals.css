@@ -491,8 +491,11 @@ a {
   border-radius: 10px;
   cursor: pointer;
   transition: 0.3s ease;
+  box-shadow: 0 0 20px red;
+  transition: 0.3s;
 }
 
 .removeAll>span:hover {
   background-color: rgb(168, 6, 39);
+  box-shadow: -5px 7px 10px red;
 }
