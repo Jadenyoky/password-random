@@ -180,6 +180,8 @@ export default function PasswordSaving() {
                       <div className="numList">{k + 1}</div>
                       <div className="date">{moment(e.date).fromNow()}</div>
 
+                      <div className="date">{moment(e.date).fromNow()}</div>
+
                       <div
                         className="line"
                         style={{
@@ -343,6 +345,8 @@ export default function PasswordSaving() {
                       )}
                       <div className="length">{e.length}</div>
                       <div className="numList">{k + 1}</div>
+                      <div className="date">{moment(e.date).fromNow()}</div>
+
                       <div
                         className="line"
                         style={{
