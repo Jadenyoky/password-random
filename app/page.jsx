@@ -179,6 +179,7 @@ export default function Password() {
         date: new Date().toString(),
         word: password.current.textContent,
         save: true,
+        edit: false,
         length: password.current.textContent.length,
       },
     ];

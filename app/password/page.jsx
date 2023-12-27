@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import store from "store2";
 import "animate.css";
 import moment from "moment";
+import styles from "./page.module.css";
 
 export default function PasswordSaving() {
   const [loading, setloading] = useState(false);
@@ -120,7 +121,7 @@ export default function PasswordSaving() {
               return (
                 <div key={k}>
                   <div className="content">
-                    <div className="password animate__animated animate__fadeIn">
+                    <div className="password passwordList animate__animated animate__fadeIn">
                       <p
                         onClick={() => {
                           copy(e.word);
@@ -145,36 +146,38 @@ export default function PasswordSaving() {
                         {e.word}
                       </p>
 
-                      <div
-                        className="copyIcon"
-                        onClick={() => {
-                          copy(e.word);
-                        }}
-                      >
-                        <i className="fi fi-rr-copy-alt"></i>
-                      </div>
+                      <div className="passwordOptions">
+                        <div
+                          className="copyIcon"
+                          onClick={() => {
+                            copy(e.word);
+                          }}
+                        >
+                          <i className="fi fi-rr-copy-alt"></i>
+                        </div>
 
-                      {e.save ? (
-                        <div
-                          className="saveIcon active"
-                          onClick={() => {
-                            remove(e.word);
-                            e.save = false;
-                          }}
-                        >
-                          <img width={`24px`} src="/pics/star-solid.png" />
-                        </div>
-                      ) : (
-                        <div
-                          className="saveIcon"
-                          onClick={() => {
-                            save(e.word);
-                            e.save = true;
-                          }}
-                        >
-                          <img width={`24px`} src="/pics/star-light.png" />
-                        </div>
-                      )}
+                        {e.save ? (
+                          <div
+                            className="saveIcon active"
+                            onClick={() => {
+                              remove(e.word);
+                              e.save = false;
+                            }}
+                          >
+                            <img width={`24px`} src="/pics/star-solid.png" />
+                          </div>
+                        ) : (
+                          <div
+                            className="saveIcon"
+                            onClick={() => {
+                              save(e.word);
+                              e.save = true;
+                            }}
+                          >
+                            <img width={`24px`} src="/pics/star-light.png" />
+                          </div>
+                        )}
+                      </div>
 
                       <div className="length">{e.length}</div>
                       <div className="numList">{k + 1}</div>
@@ -288,7 +291,7 @@ export default function PasswordSaving() {
               return (
                 <div key={k}>
                   <div className="content">
-                    <div className="password animate__animated animate__fadeIn ">
+                    <div className="password passwordList animate__animated animate__fadeIn ">
                       <p
                         onClick={() => {
                           copy(e.word);
@@ -313,36 +316,38 @@ export default function PasswordSaving() {
                         {e.word}
                       </p>
 
-                      <div
-                        className="copyIcon"
-                        onClick={() => {
-                          copy(e.word);
-                        }}
-                      >
-                        <i className="fi fi-rr-copy-alt"></i>
-                      </div>
+                      <div className="passwordOptions">
+                        <div
+                          className="copyIcon"
+                          onClick={() => {
+                            copy(e.word);
+                          }}
+                        >
+                          <i className="fi fi-rr-copy-alt"></i>
+                        </div>
 
-                      {e.save ? (
-                        <div
-                          className="saveIcon active"
-                          onClick={() => {
-                            e.save = false;
-                            remove(e.word);
-                          }}
-                        >
-                          <img width={`24px`} src="/pics/star-solid.png" />
-                        </div>
-                      ) : (
-                        <div
-                          className="saveIcon"
-                          onClick={() => {
-                            e.save = true;
-                            save(e.word);
-                          }}
-                        >
-                          <img width={`24px`} src="/pics/star-light.png" />
-                        </div>
-                      )}
+                        {e.save ? (
+                          <div
+                            className="saveIcon active"
+                            onClick={() => {
+                              e.save = false;
+                              remove(e.word);
+                            }}
+                          >
+                            <img width={`24px`} src="/pics/star-solid.png" />
+                          </div>
+                        ) : (
+                          <div
+                            className="saveIcon"
+                            onClick={() => {
+                              e.save = true;
+                              save(e.word);
+                            }}
+                          >
+                            <img width={`24px`} src="/pics/star-light.png" />
+                          </div>
+                        )}
+                      </div>
                       <div className="length">{e.length}</div>
                       <div className="numList">{k + 1}</div>
                       <div className="date">{moment(e.date).fromNow()}</div>
