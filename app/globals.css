@@ -94,6 +94,7 @@ a {
   position: relative;
   background-color: rgba(255, 255, 255, 0.329);
   text-align: center;
+  z-index: 20;
 }
 
 .navigate>a {
@@ -231,6 +232,23 @@ a {
 }
 
 .saveIcon:hover {
+  border-radius: 10px;
+  color: seagreen;
+  border: 1px solid seagreen;
+}
+
+.editIcon {
+  border: 1px solid transparent;
+  border-bottom: 1px solid grey;
+  color: grey;
+  font-size: 24px;
+  padding: 5px 10px;
+  z-index: 1;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.editIcon:hover {
   border-radius: 10px;
   color: seagreen;
   border: 1px solid seagreen;
@@ -455,7 +473,7 @@ a {
   border: 1px solid gainsboro;
   padding: 5px 10px;
   border-radius: 10px;
-  width: 40px;
+  min-width: 40px;
   text-align: center;
 }
 
@@ -487,6 +505,25 @@ a {
   text-wrap: nowrap;
 }
 
+.dateLast {
+  position: absolute;
+  right: 0;
+  top: -15px;
+  font-size: 15px;
+  border: 1px solid gainsboro;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-family: neo-reg;
+  background-color: greenyellow;
+}
+
+.dateLast>p {
+  color: green;
+}
+
+.dateLast>p>span {
+  color: grey;
+}
 
 .removeAll {
   position: absolute;
@@ -540,7 +577,60 @@ a {
     margin-top: 5px;
   }
 
+  .dateLast {
+    position: unset;
+  }
+
   ::-webkit-scrollbar {
     display: none;
   }
+}
+
+.update {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  z-index: 12;
+  background: rgba(220, 220, 220, 0.199);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s ease;
+}
+
+@keyframes rsr {
+  0% {
+    transform: scale(0);
+
+  }
+
+  50% {
+    transform: scale(1);
+  }
+}
+
+.update>div {
+  min-height: 300px;
+  box-shadow: 0 0 10px grey;
+  border-radius: 15px;
+  min-width: 80%;
+  background: #893168;
+  animation: rsr 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.update>div>input {
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 17px;
+  text-align: center;
+  font-family: neo-reg;
+  border: 0;
+  outline: none;
 }

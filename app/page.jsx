@@ -148,6 +148,10 @@ export default function Password() {
       small,
     ]);
     setres(_.sampleSize(arr, num.current.value));
+
+    const sound = new Audio();
+    sound.src = "./sounds/generate.wav";
+    sound.play();
   };
   // Function to copy current password
   function copy() {
@@ -160,6 +164,11 @@ export default function Password() {
       elem.classList.remove("ani");
     }, 1500);
     document.body.append(elem);
+
+    const sound = new Audio();
+    sound.src = "./sounds/copy.wav";
+
+    sound.play();
   }
   // Function to save current password
   function save() {
@@ -176,7 +185,7 @@ export default function Password() {
       ...saved,
       {
         id: Date.now(),
-        date: new Date().toString(),
+        date: new Date(),
         word: password.current.textContent,
         save: true,
         edit: false,
@@ -185,6 +194,11 @@ export default function Password() {
     ];
     setsaved(_.uniqBy(add, "word"));
     setkeep(true);
+
+    const sound = new Audio();
+    sound.src = "./sounds/save.wav";
+
+    sound.play();
   }
   // Function to remove current password
   function remove() {
@@ -202,6 +216,11 @@ export default function Password() {
     );
 
     setkeep(false);
+
+    const sound = new Audio();
+    sound.src = "./sounds/remove.wav";
+
+    sound.play();
   }
   // Active each time change any state of that
   useEffect(() => {
