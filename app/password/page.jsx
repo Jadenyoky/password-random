@@ -9,19 +9,14 @@ import styles from "./page.module.css";
 import { usePathname } from "next/navigation";
 
 export default function PasswordSaving() {
-  const path = usePathname();
-  console.log(path);
-
   const [loading, setloading] = useState(false);
+  // To switch between normal and fast mode
   const [mode, setmode] = useState(false);
   // Array in localstorage
   const inStore = store("saved");
   const [saved, setsaved] = useState(inStore ? inStore : []);
 
   const [res, setres] = useState(saved);
-  // To control in range and number letters in password
-
-  // To switch save and remove icon
   // Function to copy current password
   function copy(password) {
     navigator.clipboard.writeText(password);
@@ -86,6 +81,7 @@ export default function PasswordSaving() {
 
     sound.play();
   }
+  // Function to edit current password
   function edit(key) {
     if (input.current.value === key.word) {
       const elem = document.createElement("div");
@@ -136,6 +132,55 @@ export default function PasswordSaving() {
       sound.play();
     }
   }
+  // Function to change levels to current password
+  function levelWord(word) {
+    setupdating(!updating);
+
+    const level = document.querySelector(".levelInput");
+    const updateLevelP = document.querySelector(".updateLevel>p");
+    if (word.length >= 18) {
+      level.style.width = "100%";
+      level.style.background = "#04A777";
+      input.current.style.color = "#04A777";
+      updateLevelP.style.backgroundColor = "#04A777";
+      updateLevelP.textContent = "Very Strong";
+    } else if (word.length >= 12) {
+      level.style.width = "75%";
+      level.style.background = "#FF9000";
+      input.current.style.color = "#FF9000";
+      updateLevelP.style.backgroundColor = "#FF9000";
+      updateLevelP.textContent = "Strong";
+    } else if (word.length >= 8) {
+      level.style.width = "50%";
+      level.style.background = "#33AAF3";
+      input.current.style.color = "#33AAF3";
+      updateLevelP.style.backgroundColor = "#33AAF3";
+      updateLevelP.textContent = "Secure";
+    } else if (word.length >= 4) {
+      level.style.width = "25%";
+      level.style.background = "red";
+      input.current.style.color = "red";
+      updateLevelP.style.backgroundColor = "red";
+      updateLevelP.textContent = "Not Secure";
+    } else if (word.length >= 1) {
+      level.style.width = "10%";
+      level.style.background = "gainsboro";
+      input.current.style.color = "grey";
+      updateLevelP.style.backgroundColor = "darkgray";
+      updateLevelP.textContent = "Low";
+    } else if (word.length === 0) {
+      level.style.width = "0%";
+      level.style.background = "gainsboro";
+      updateLevelP.style.backgroundColor = "darkgray";
+      updateLevelP.textContent = "Wait ...";
+    }
+
+    const sound = new Audio();
+    sound.src = "./sounds/typing.wav";
+
+    sound.play();
+  }
+  // Function to cancel updating current password
   function cancel(key) {
     _.set(key, "edit", false);
     const sound = new Audio();
@@ -152,20 +197,41 @@ export default function PasswordSaving() {
     }, 1500);
     document.body.append(elem);
   }
+  // Function to remove all arrays in localstroge and list
+  function removeAll() {
+    store.remove("saved");
+    setres([]);
+    setsaved([]);
 
+    const elem = document.createElement("div");
+    elem.textContent = "Remove All!";
+    elem.classList.add("done");
+    elem.classList.add("ani");
+    setTimeout(() => {
+      elem.classList.remove("ani");
+    }, 1500);
+    document.body.append(elem);
+
+    const sound = new Audio();
+    sound.src = "./sounds/remove-all.wav";
+
+    sound.play();
+  }
+  // To control on input value and length
   const input = useRef();
+  // To refresh useEffect after any updating
   const [updating, setupdating] = useState(false);
+  // To create array of objects with previous saved
   useEffect(() => {
     store("saved", saved);
-    console.log(saved);
+    // console.log(saved);
     setloading(true);
   }, [saved, updating]);
-
+  // To reset all objects edit = false
   useEffect(() => {
     for (let i = 0; i < saved.length; i++) {
       const element = saved[i];
       _.set(element, "edit", false);
-      console.log(element);
     }
 
     const sound = new Audio();
@@ -450,6 +516,7 @@ export default function PasswordSaving() {
                             <img width={`24px`} src="/pics/star-light.png" />
                           </div>
                         )}
+
                         <div
                           className="editIcon"
                           onClick={() => {
@@ -458,7 +525,6 @@ export default function PasswordSaving() {
                             const sound = new Audio();
                             sound.src = "./sounds/cancel.wav";
                             sound.play();
-
                             setupdating(!updating);
                           }}
                         >
@@ -467,39 +533,114 @@ export default function PasswordSaving() {
 
                         {e.edit && (
                           <div className="update">
-                            <div>
-                              <input
-                                ref={input}
-                                type="text"
-                                defaultValue={e.word}
-                                onChange={(e) => {
-                                  const sound = new Audio();
-                                  sound.src = "./sounds/typing.wav";
+                            <div className="updateCont">
+                              <div className="updateLevel">
+                                <p
+                                  style={{
+                                    background:
+                                      e.word.length >= 18
+                                        ? "#04A777"
+                                        : e.word.length >= 12
+                                        ? "#FF9000"
+                                        : e.word.length >= 8
+                                        ? "#33AAF3"
+                                        : e.word.length >= 4
+                                        ? "red"
+                                        : e.word.length >= 1
+                                        ? "darkgray"
+                                        : "darkgray",
+                                  }}
+                                >
+                                  {e.word.length >= 18
+                                    ? "Very Strong"
+                                    : e.word.length >= 12
+                                    ? "Strong"
+                                    : e.word.length >= 8
+                                    ? "Secure"
+                                    : e.word.length >= 4
+                                    ? "Not Secure"
+                                    : e.word.length >= 1
+                                    ? "Low"
+                                    : "Wait"}
+                                </p>
+                                <span>
+                                  {input.current
+                                    ? input.current.value.length
+                                    : e.word.length}
+                                </span>
+                              </div>
+                              <div className="updateInput">
+                                <input
+                                  ref={input}
+                                  type="text"
+                                  defaultValue={e.word}
+                                  onChange={(word) => {
+                                    levelWord(word.target.value);
+                                  }}
+                                  style={{
+                                    color:
+                                      e.word.length >= 18
+                                        ? "#04A777"
+                                        : e.word.length >= 12
+                                        ? "#FF9000"
+                                        : e.word.length >= 8
+                                        ? "#33AAF3"
+                                        : e.word.length >= 4
+                                        ? "red"
+                                        : e.word.length >= 1
+                                        ? "grey"
+                                        : "grey",
+                                  }}
+                                />
+                                <div
+                                  className="levelInput"
+                                  style={{
+                                    background:
+                                      e.word.length >= 18
+                                        ? "#04A777"
+                                        : e.word.length >= 12
+                                        ? "#FF9000"
+                                        : e.word.length >= 8
+                                        ? "#33AAF3"
+                                        : e.word.length >= 4
+                                        ? "red"
+                                        : e.word.length >= 1
+                                        ? "gainsboro"
+                                        : "gainsboro",
+                                    width:
+                                      e.word.length >= 18
+                                        ? "100%"
+                                        : e.word.length >= 12
+                                        ? "75%"
+                                        : e.word.length >= 8
+                                        ? "50%"
+                                        : e.word.length >= 4
+                                        ? "25%"
+                                        : e.word.length >= 1
+                                        ? "10%"
+                                        : "10%",
+                                  }}
+                                ></div>
+                              </div>
 
-                                  sound.play();
-                                  console.log(
-                                    e.target.value,
-                                    input.current.value,
-                                    input.current.value.length
-                                  );
-                                }}
-                              />
-                              <button
-                                onClick={() => {
-                                  cancel(saved[k]);
-                                  setupdating(!updating);
-                                }}
-                              >
-                                Cancel
-                              </button>
-                              <button
-                                onClick={() => {
-                                  edit(saved[k]);
-                                  setupdating(!updating);
-                                }}
-                              >
-                                Update
-                              </button>
+                              <div className="updateOptions">
+                                <button
+                                  onClick={() => {
+                                    cancel(saved[k]);
+                                    setupdating(!updating);
+                                  }}
+                                >
+                                  Cancel
+                                </button>
+                                <button
+                                  onClick={() => {
+                                    edit(saved[k]);
+                                    setupdating(!updating);
+                                  }}
+                                >
+                                  Update
+                                </button>
+                              </div>
                             </div>
                           </div>
                         )}
@@ -623,9 +764,7 @@ export default function PasswordSaving() {
           <span
             className="animate__animated animate__fadeInDown"
             onClick={() => {
-              store.remove("saved");
-              setres([]);
-              setsaved([]);
+              removeAll();
             }}
           >
             Remove All

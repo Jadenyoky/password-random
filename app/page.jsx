@@ -286,11 +286,11 @@ export default function Password() {
                 ? num.current.value >= 18
                   ? "100%"
                   : num.current.value >= 12
-                  ? "80%"
+                  ? "75%"
                   : num.current.value >= 8
                   ? "50%"
                   : num.current.value >= 4
-                  ? "30%"
+                  ? "25%"
                   : num.current.value >= 1
                   ? "10%"
                   : "10%"

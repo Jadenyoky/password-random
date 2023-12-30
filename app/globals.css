@@ -452,14 +452,14 @@ a {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: white;
+  background-color: transparent;
   border-radius: 24px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #9CA3AF;
+  background-color: rgba(128, 128, 128, 0.795);
   border-radius: 16px;
-  border: 4px solid white;
+  border: 5px solid #CAEDF7;
 }
 
 
@@ -594,18 +594,18 @@ a {
   height: 100%;
   transform: translate(-50%, -50%);
   z-index: 12;
-  background: rgba(220, 220, 220, 0.199);
-  backdrop-filter: blur(5px);
+  background: rgba(220, 220, 220, 0.897);
+  /* backdrop-filter: blur(5px); */
   display: flex;
   justify-content: center;
   align-items: center;
   transition: 0.3s ease;
+  flex-direction: column;
 }
 
 @keyframes rsr {
   0% {
     transform: scale(0);
-
   }
 
   50% {
@@ -613,24 +613,111 @@ a {
   }
 }
 
-.update>div {
+.updateCont {
+  background-color: white;
+  width: 800px;
+  max-width: 90%;
   min-height: 300px;
-  box-shadow: 0 0 10px grey;
-  border-radius: 15px;
-  min-width: 80%;
-  background: #893168;
-  animation: rsr 0.5s;
+  border-radius: 24px;
+  box-shadow: 10px 10px 10px seagreen;
+  border: 2px solid greenyellow;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  animation: rsr 0.5s ease;
 }
 
-.update>div>input {
-  padding: 10px 20px;
-  border-radius: 10px;
-  font-size: 17px;
+.updateLevel {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: -10px;
+}
+
+.updateLevel>p {
+  background-color: red;
+  color: white;
+  padding: 10px;
+  border-radius: 15px;
+  font-weight: bold;
+  width: 150px;
+  transition: 0.3s ease;
   text-align: center;
+}
+
+.updateLevel>span {
+  background-color: white;
+  color: grey;
+  border: 1px solid gainsboro;
+  padding: 5px 10px;
+  border-radius: 10px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.updateInput {
+  min-height: 70px;
+  width: 400px;
+  max-width: 80%;
+  position: relative;
+}
+
+.updateInput>input {
+  height: 100%;
+  width: 100%;
+  padding: 15px 20px;
+  border-radius: 15px 15px 5px 5px;
+  text-align: center;
+  border: 1px solid gainsboro;
+  font-size: 20px;
   font-family: neo-reg;
-  border: 0;
   outline: none;
+  position: relative;
+}
+
+.updateInput>div {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 5px;
+  border-radius: 50px;
+  transition: 0.3s ease;
+}
+
+.updateOptions {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.updateOptions>button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 1px solid gainsboro;
+  font-size: 16px;
+  font-family: neo-bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.updateOptions>button:nth-child(1) {
+  background-color: red;
+  color: white;
+}
+
+.updateOptions>button:nth-child(2) {
+  background-color: rgb(53, 180, 53);
+  color: white;
+}
+
+.updateOptions>button:nth-child(1):hover {
+  background-color: rgb(223, 26, 26);
+}
+
+.updateOptions>button:nth-child(2):hover {
+  background-color: rgb(13, 156, 13);
 }
