@@ -6,7 +6,7 @@ import Link from "next/link";
 import store from "store2";
 ("store2");
 import "animate.css";
-import PasswordSaving from "./password/page";
+import PasswordSaving from "./list/page";
 
 export default function Password() {
   const [loading, setloading] = useState(false);
@@ -238,7 +238,7 @@ export default function Password() {
           <Link className="linking" href={`/`}>
             Generate
           </Link>
-          <Link href={`/password`}>List</Link>
+          <Link href={`/list`}>List</Link>
         </div>
       </div>
       <div className="content">
@@ -476,7 +476,7 @@ export default function Password() {
       </div>
       {/* <div className="content">
         <div className="gen">
-          <Link href={"/password"} className="draftIcon">
+          <Link href={"/list"} className="draftIcon">
             <i className="fi fi-rr-memo-circle-check"></i>
           </Link>
         </div>

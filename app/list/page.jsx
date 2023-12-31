@@ -6,7 +6,6 @@ import store from "store2";
 import "animate.css";
 import moment from "moment";
 import styles from "./page.module.css";
-import { usePathname } from "next/navigation";
 
 export default function PasswordSaving() {
   const [loading, setloading] = useState(false);
@@ -242,10 +241,12 @@ export default function PasswordSaving() {
 
   return (
     <>
+      <title>List Passwords</title>
+
       <div className="content">
         <div className="navigate">
           <Link href={`/`}>Generate</Link>
-          <Link className="linking" href={`/password`}>
+          <Link className="linking" href={`/list`}>
             List
           </Link>
           {loading && res.length > 0 ? (
