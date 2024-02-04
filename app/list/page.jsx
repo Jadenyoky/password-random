@@ -531,120 +531,6 @@ export default function PasswordSaving() {
                         >
                           <i className="fi fi-rr-pen-field"></i>
                         </div>
-
-                        {e.edit && (
-                          <div className="update">
-                            <div className="updateCont">
-                              <div className="updateLevel">
-                                <p
-                                  style={{
-                                    background:
-                                      e.word.length >= 18
-                                        ? "#04A777"
-                                        : e.word.length >= 12
-                                        ? "#FF9000"
-                                        : e.word.length >= 8
-                                        ? "#33AAF3"
-                                        : e.word.length >= 4
-                                        ? "red"
-                                        : e.word.length >= 1
-                                        ? "darkgray"
-                                        : "darkgray",
-                                  }}
-                                >
-                                  {e.word.length >= 18
-                                    ? "Very Strong"
-                                    : e.word.length >= 12
-                                    ? "Strong"
-                                    : e.word.length >= 8
-                                    ? "Secure"
-                                    : e.word.length >= 4
-                                    ? "Not Secure"
-                                    : e.word.length >= 1
-                                    ? "Low"
-                                    : "Wait"}
-                                </p>
-                                <span>
-                                  {input.current
-                                    ? input.current.value.length
-                                    : e.word.length}
-                                </span>
-                              </div>
-                              <div className="updateInput">
-                                <input
-                                  ref={input}
-                                  type="text"
-                                  defaultValue={e.word}
-                                  onChange={(word) => {
-                                    levelWord(word.target.value);
-                                  }}
-                                  style={{
-                                    color:
-                                      e.word.length >= 18
-                                        ? "#04A777"
-                                        : e.word.length >= 12
-                                        ? "#FF9000"
-                                        : e.word.length >= 8
-                                        ? "#33AAF3"
-                                        : e.word.length >= 4
-                                        ? "red"
-                                        : e.word.length >= 1
-                                        ? "grey"
-                                        : "grey",
-                                  }}
-                                />
-                                <div
-                                  className="levelInput"
-                                  style={{
-                                    background:
-                                      e.word.length >= 18
-                                        ? "#04A777"
-                                        : e.word.length >= 12
-                                        ? "#FF9000"
-                                        : e.word.length >= 8
-                                        ? "#33AAF3"
-                                        : e.word.length >= 4
-                                        ? "red"
-                                        : e.word.length >= 1
-                                        ? "gainsboro"
-                                        : "gainsboro",
-                                    width:
-                                      e.word.length >= 18
-                                        ? "100%"
-                                        : e.word.length >= 12
-                                        ? "75%"
-                                        : e.word.length >= 8
-                                        ? "50%"
-                                        : e.word.length >= 4
-                                        ? "25%"
-                                        : e.word.length >= 1
-                                        ? "10%"
-                                        : "10%",
-                                  }}
-                                ></div>
-                              </div>
-
-                              <div className="updateOptions">
-                                <button
-                                  onClick={() => {
-                                    cancel(saved[k]);
-                                    setupdating(!updating);
-                                  }}
-                                >
-                                  Cancel
-                                </button>
-                                <button
-                                  onClick={() => {
-                                    edit(saved[k]);
-                                    setupdating(!updating);
-                                  }}
-                                >
-                                  Update
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        )}
                       </div>
 
                       <div className="length">{e.length}</div>
@@ -748,6 +634,119 @@ export default function PasswordSaving() {
                         </p>
                       </div>
                     </div>
+                    {e.edit && (
+                      <div className="update">
+                        <div className="updateCont">
+                          <div className="updateLevel">
+                            <p
+                              style={{
+                                background:
+                                  e.word.length >= 18
+                                    ? "#04A777"
+                                    : e.word.length >= 12
+                                    ? "#FF9000"
+                                    : e.word.length >= 8
+                                    ? "#33AAF3"
+                                    : e.word.length >= 4
+                                    ? "red"
+                                    : e.word.length >= 1
+                                    ? "darkgray"
+                                    : "darkgray",
+                              }}
+                            >
+                              {e.word.length >= 18
+                                ? "Very Strong"
+                                : e.word.length >= 12
+                                ? "Strong"
+                                : e.word.length >= 8
+                                ? "Secure"
+                                : e.word.length >= 4
+                                ? "Not Secure"
+                                : e.word.length >= 1
+                                ? "Low"
+                                : "Wait"}
+                            </p>
+                            <span>
+                              {input.current
+                                ? input.current.value.length
+                                : e.word.length}
+                            </span>
+                          </div>
+                          <div className="updateInput">
+                            <input
+                              ref={input}
+                              type="text"
+                              defaultValue={e.word}
+                              onChange={(word) => {
+                                levelWord(word.target.value);
+                              }}
+                              style={{
+                                color:
+                                  e.word.length >= 18
+                                    ? "#04A777"
+                                    : e.word.length >= 12
+                                    ? "#FF9000"
+                                    : e.word.length >= 8
+                                    ? "#33AAF3"
+                                    : e.word.length >= 4
+                                    ? "red"
+                                    : e.word.length >= 1
+                                    ? "grey"
+                                    : "grey",
+                              }}
+                            />
+                            <div
+                              className="levelInput"
+                              style={{
+                                background:
+                                  e.word.length >= 18
+                                    ? "#04A777"
+                                    : e.word.length >= 12
+                                    ? "#FF9000"
+                                    : e.word.length >= 8
+                                    ? "#33AAF3"
+                                    : e.word.length >= 4
+                                    ? "red"
+                                    : e.word.length >= 1
+                                    ? "gainsboro"
+                                    : "gainsboro",
+                                width:
+                                  e.word.length >= 18
+                                    ? "100%"
+                                    : e.word.length >= 12
+                                    ? "75%"
+                                    : e.word.length >= 8
+                                    ? "50%"
+                                    : e.word.length >= 4
+                                    ? "25%"
+                                    : e.word.length >= 1
+                                    ? "10%"
+                                    : "10%",
+                              }}
+                            ></div>
+                          </div>
+
+                          <div className="updateOptions">
+                            <button
+                              onClick={() => {
+                                cancel(saved[k]);
+                                setupdating(!updating);
+                              }}
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              onClick={() => {
+                                edit(saved[k]);
+                                setupdating(!updating);
+                              }}
+                            >
+                              Update
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               );
